@@ -61,7 +61,7 @@ class ViewController: UIViewController {
 
   @objc func confirmAddress(_ sender: AnyObject?) {
     print("inside click of the button")
-    navigationController?.pushViewController(NearByStoreListViewController(), animated: true)
+    navigationController?.pushViewController(StoreTabBarViewController(), animated: true)
   }
 }
 

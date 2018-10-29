@@ -9,6 +9,51 @@
 import UIKit
 import AFNetworking
 
+class StoreTabBarViewController: UITabBarController {
+  
+  lazy var vc1 : NearByStoreListViewController = {
+    let storeVC =  NearByStoreListViewController()
+    storeVC.tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab-explore")?.withRenderingMode(.alwaysOriginal), tag: 0)
+    return storeVC
+  }()
+  
+  lazy var favoritesVC : FavoritesViewController = {
+    let storeVC =  FavoritesViewController()
+    storeVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "tab-star")?.withRenderingMode(.alwaysOriginal), tag: 1)
+    return storeVC
+  }()
+  
+  lazy var barButtonItem: UIBarButtonItem = {
+    let backImage = UIImage(named: "nav-address")
+    let a = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+    a.setBackgroundImage(backImage, for: .normal, barMetrics: UIBarMetrics.default)
+    a.target = self
+    a.action = #selector(goBack(_:))
+    return a
+  }()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.viewControllers = [vc1, favoritesVC]
+    configureNavBar()
+    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
+  }
+  
+  @objc func goBack(_ sender: AnyObject?) {
+    print("going back")
+    self.navigationController?.popViewController(animated: true)
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+  }
+  
+  func configureNavBar() {
+    navigationItem.leftBarButtonItem = barButtonItem
+    navigationItem.title = "DoorDash"
+  }
+}
+
 class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
   lazy var tableView: UITableView = {
@@ -31,15 +76,6 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     view.backgroundColor = UIColor.white
     view.addSubview(tableView)
     configureTableViewConstraints()
-    let yourBackImage = UIImage(named: "nav-address")
-    
-    let a = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-    a.setBackgroundImage(yourBackImage, for: .normal, barMetrics: UIBarMetrics.default)
-    a.target = self
-    a.action = #selector(goBack(_:))
-    navigationItem.leftBarButtonItem = a
-    
-    navigationItem.title = "DoorDash"
     let url = URL(string: "https://api.doordash.com/")!
     let path = "v1/store_search/?lat=37.42274&lng=-122.139956"
     let manager = AFHTTPSessionManager(baseURL: url)
@@ -61,12 +97,7 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
       print("failure")
     }
   }
-  
-  @objc func goBack(_ sender: AnyObject?) {
-    print("going back")
-    self.navigationController?.popViewController(animated: true)
-  }
-  
+
   func configureTableViewConstraints()
   {
     tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
@@ -85,5 +116,12 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "StoreViewCell") as? StoreViewCell else { return UITableViewCell() }
     cell.configureCellData(data: (viewModel?.storeInfoList[indexPath.row])!)
     return cell
+  }
+}
+
+class FavoritesViewController: UIViewController {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = UIColor.brown
   }
 }

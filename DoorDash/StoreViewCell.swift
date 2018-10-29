@@ -10,14 +10,9 @@ import UIKit
 
 class StoreViewCell: UITableViewCell {
   
-  @IBOutlet weak var anchorImage: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var cuisineType: UILabel!
-  @IBOutlet weak var stackView: UIStackView!
   
   override func prepareForReuse() {
-    titleLabel.text = ""
-    cuisineType.text = ""
   }
   
   override func awakeFromNib() {
@@ -25,7 +20,6 @@ class StoreViewCell: UITableViewCell {
   }
 
   func configureCellData(data: StoreBasicInfo) {
-    titleLabel.text = data.name
-    cuisineType.text = data.description
+    titleLabel.text = "This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on This is a really long text and it goes on and on and on"
   }
 }
