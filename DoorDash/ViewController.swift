@@ -48,15 +48,15 @@ class ViewController: UIViewController {
   private func addConstraintsForMapView() {
     mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
     mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-    mapView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+    mapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
     mapView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 0).isActive = true
   }
   
   private func addConstraintsForConfirmButton() {
     confirmButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
     confirmButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-    confirmButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-    confirmButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    confirmButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+    confirmButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
   }
 
   @objc func confirmAddress(_ sender: AnyObject?) {
