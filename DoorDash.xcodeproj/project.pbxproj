@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		CA0698A38E3D879F4894E9A8 /* Pods_DoorDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684B1BB33D67348123B052EE /* Pods_DoorDash.framework */; };
 		E8408E6821881B56009548E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8408E6621881B56009548E1 /* Localizable.strings */; };
-		E8408E7021882CCE009548E1 /* DoorDashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8408E6F21882CCE009548E1 /* DoorDashTests.swift */; };
 		E8C4FDE121883F8200434747 /* StoreBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4FDE021883F8200434747 /* StoreBasicInfo.swift */; };
 		E8C4FDE92188433500434747 /* StoreBasicInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4FDE82188433500434747 /* StoreBasicInfoTests.swift */; };
 		E8C4FDEC2188464D00434747 /* StoreListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4FDEB2188464D00434747 /* StoreListViewModelTests.swift */; };
@@ -40,7 +39,6 @@
 		E8408E6521881AD6009548E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E8408E6721881B56009548E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E8408E6D21882CCE009548E1 /* DoorDashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoorDashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8408E6F21882CCE009548E1 /* DoorDashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorDashTests.swift; sourceTree = "<group>"; };
 		E8408E7121882CCE009548E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8C4FDE021883F8200434747 /* StoreBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBasicInfo.swift; sourceTree = "<group>"; };
 		E8C4FDE82188433500434747 /* StoreBasicInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBasicInfoTests.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				E8C4FDE221883FAA00434747 /* application */,
-				E8408E6F21882CCE009548E1 /* DoorDashTests.swift */,
 				E8408E7121882CCE009548E1 /* Info.plist */,
 			);
 			path = DoorDashTests;
@@ -434,7 +431,6 @@
 			files = (
 				E8C4FDEC2188464D00434747 /* StoreListViewModelTests.swift in Sources */,
 				E8C4FDE92188433500434747 /* StoreBasicInfoTests.swift in Sources */,
-				E8408E7021882CCE009548E1 /* DoorDashTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
