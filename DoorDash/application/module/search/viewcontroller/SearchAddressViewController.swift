@@ -94,12 +94,12 @@ extension SearchAddressViewController: CLLocationManagerDelegate {
                                           longitude: lastLocation.coordinate.longitude,
                                           zoom: 15.0)
     
-    guard let mapView1 = self.mapView else { return }
-    if mapView1.isHidden {
-      mapView1.isHidden = false
-      mapView1.camera = camera
+    guard let mapView = self.mapView else { return }
+    if mapView.isHidden {
+      mapView.isHidden = false
+      mapView.camera = camera
     } else {
-      mapView1.animate(to: camera)
+      mapView.animate(to: camera)
     }
   }
   
