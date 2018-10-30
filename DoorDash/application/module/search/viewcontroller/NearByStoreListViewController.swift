@@ -94,7 +94,7 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     view.backgroundColor = UIColor.white
     view.addSubview(tableView)
     configureTableViewConstraints()
-    let url = URL(string: "https://api.doordash.com/")!
+    let url = URL(string: "https://api.doordash.com/") ?? URL(string: "")
     
     guard let lat = self.latitude,
       let long = self.longitude else { return }
@@ -116,7 +116,7 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
                     self.tableView.reloadData()
                   }
     }) { (task, error) in
-      print("failure")
+      NSLog("failure")
     }
   }
 

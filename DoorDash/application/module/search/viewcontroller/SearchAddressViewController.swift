@@ -12,6 +12,10 @@ import GoogleMaps
 class SearchAddressViewController: UIViewController {
   
   var locationManager = CLLocationManager()
+  var mapView: GMSMapView?
+  let camera = GMSCameraPosition.camera(withLatitude: 37.585600,
+                                        longitude: -122.011151,
+                                        zoom: 15.0)
   
   lazy var marker: GMSMarker = {
     let marker = GMSMarker()
@@ -22,13 +26,7 @@ class SearchAddressViewController: UIViewController {
     marker.isDraggable = true
     return marker
   }()
-  
-  var lastLocation: CLLocation?
-  let camera = GMSCameraPosition.camera(withLatitude: 37.585600,
-                                        longitude: -122.011151,
-                                        zoom: 15.0)
-  var mapView: GMSMapView?
-  
+
   lazy var confirmButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = UIColor.red
@@ -80,7 +78,7 @@ class SearchAddressViewController: UIViewController {
   }
 
   @objc func confirmAddress(_ sender: AnyObject?) {
-    print("inside click of the button")
+    NSLog("inside click of the button")
     navigationController?.pushViewController(StoreTabBarViewController(lat: marker.position.latitude, long: marker.position.longitude), animated: true)
   }
 }
@@ -107,36 +105,27 @@ extension SearchAddressViewController: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     switch status {
     case .restricted:
-      print("Location access was restricted.")
+      NSLog("Location access was restricted.")
     case .denied:
-      print("User denied access to location.")
-      // Display the map using the default location.
-    
-    case .notDetermined: fallthrough
+      NSLog("User denied access to location.")
+    case .notDetermined:
+      NSLog("User state not determined.")
+      
     case .authorizedAlways: fallthrough
     case .authorizedWhenInUse:
-      print("Location status is OK.")
+      NSLog("Location status is OK.")
     }
   }
   
   // Handle location manager errors.
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     locationManager.stopUpdatingLocation()
-    print("Error: \(error)")
+    NSLog("Error: \(error)")
   }
 }
 
 extension SearchAddressViewController: GMSMapViewDelegate {
-  func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
-    print("didBeginDragging")
-  }
-  func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
-    print("didDrag")
-  }
-  func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
-    print("didEndDragging")
-  }
-  
+
   func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D){
     marker.position = coordinate
   }
