@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		CA0698A38E3D879F4894E9A8 /* Pods_DoorDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684B1BB33D67348123B052EE /* Pods_DoorDash.framework */; };
 		E8408E6821881B56009548E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8408E6621881B56009548E1 /* Localizable.strings */; };
+		E8408E7021882CCE009548E1 /* DoorDashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8408E6F21882CCE009548E1 /* DoorDashTests.swift */; };
 		E8D7B76721857B5000A46580 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7B76621857B5000A46580 /* AppDelegate.swift */; };
 		E8D7B76921857B5000A46580 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7B76821857B5000A46580 /* ViewController.swift */; };
 		E8D7B76C21857B5000A46580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8D7B76A21857B5000A46580 /* Main.storyboard */; };
@@ -19,12 +20,25 @@
 		E8DFDC3821867AE7002C21E0 /* StoreListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E8408E7221882CCE009548E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E8D7B75B21857B5000A46580 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8D7B76221857B5000A46580;
+			remoteInfo = DoorDash;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		208590C4407C860448897F43 /* Pods-DoorDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash.debug.xcconfig"; path = "Target Support Files/Pods-DoorDash/Pods-DoorDash.debug.xcconfig"; sourceTree = "<group>"; };
 		684B1BB33D67348123B052EE /* Pods_DoorDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DoorDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC5526CB5AD3319ABA6664D /* Pods-DoorDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash.release.xcconfig"; path = "Target Support Files/Pods-DoorDash/Pods-DoorDash.release.xcconfig"; sourceTree = "<group>"; };
 		E8408E6521881AD6009548E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E8408E6721881B56009548E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E8408E6D21882CCE009548E1 /* DoorDashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoorDashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8408E6F21882CCE009548E1 /* DoorDashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorDashTests.swift; sourceTree = "<group>"; };
+		E8408E7121882CCE009548E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8D7B76321857B5000A46580 /* DoorDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoorDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D7B76621857B5000A46580 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8D7B76821857B5000A46580 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,6 +53,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E8408E6A21882CCE009548E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8D7B76021857B5000A46580 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,10 +89,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E8408E6E21882CCE009548E1 /* DoorDashTests */ = {
+			isa = PBXGroup;
+			children = (
+				E8408E6F21882CCE009548E1 /* DoorDashTests.swift */,
+				E8408E7121882CCE009548E1 /* Info.plist */,
+			);
+			path = DoorDashTests;
+			sourceTree = "<group>";
+		};
 		E8D7B75A21857B5000A46580 = {
 			isa = PBXGroup;
 			children = (
 				E8D7B76521857B5000A46580 /* DoorDash */,
+				E8408E6E21882CCE009548E1 /* DoorDashTests */,
 				E8D7B76421857B5000A46580 /* Products */,
 				28DC8FF9C7F8BC648531D372 /* Pods */,
 				4566D09023E264F74C7BB9F8 /* Frameworks */,
@@ -82,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				E8D7B76321857B5000A46580 /* DoorDash.app */,
+				E8408E6D21882CCE009548E1 /* DoorDashTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,6 +139,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E8408E6C21882CCE009548E1 /* DoorDashTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8408E7421882CCE009548E1 /* Build configuration list for PBXNativeTarget "DoorDashTests" */;
+			buildPhases = (
+				E8408E6921882CCE009548E1 /* Sources */,
+				E8408E6A21882CCE009548E1 /* Frameworks */,
+				E8408E6B21882CCE009548E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8408E7321882CCE009548E1 /* PBXTargetDependency */,
+			);
+			name = DoorDashTests;
+			productName = DoorDashTests;
+			productReference = E8408E6D21882CCE009548E1 /* DoorDashTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E8D7B76221857B5000A46580 /* DoorDash */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8D7B77521857B5100A46580 /* Build configuration list for PBXNativeTarget "DoorDash" */;
@@ -136,6 +186,10 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Adhyam Nagarajan, Padmaja";
 				TargetAttributes = {
+					E8408E6C21882CCE009548E1 = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = E8D7B76221857B5000A46580;
+					};
 					E8D7B76221857B5000A46580 = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -155,11 +209,19 @@
 			projectRoot = "";
 			targets = (
 				E8D7B76221857B5000A46580 /* DoorDash */,
+				E8408E6C21882CCE009548E1 /* DoorDashTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E8408E6B21882CCE009548E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8D7B76121857B5000A46580 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +283,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E8408E6921882CCE009548E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8408E7021882CCE009548E1 /* DoorDashTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8D7B75F21857B5000A46580 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,6 +304,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E8408E7321882CCE009548E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8D7B76221857B5000A46580 /* DoorDash */;
+			targetProxy = E8408E7221882CCE009548E1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E8408E6621881B56009548E1 /* Localizable.strings */ = {
@@ -264,6 +342,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E8408E7521882CCE009548E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9ZCPCRWHPN;
+				INFOPLIST_FILE = DoorDashTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.DoorDashTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoorDash.app/DoorDash";
+			};
+			name = Debug;
+		};
+		E8408E7621882CCE009548E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9ZCPCRWHPN;
+				INFOPLIST_FILE = DoorDashTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.paypal.DoorDashTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoorDash.app/DoorDash";
+			};
+			name = Release;
+		};
 		E8D7B77321857B5100A46580 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -421,6 +539,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E8408E7421882CCE009548E1 /* Build configuration list for PBXNativeTarget "DoorDashTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8408E7521882CCE009548E1 /* Debug */,
+				E8408E7621882CCE009548E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E8D7B75E21857B5000A46580 /* Build configuration list for PBXProject "DoorDash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
