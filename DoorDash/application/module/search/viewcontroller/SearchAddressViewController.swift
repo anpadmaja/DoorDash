@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchAddressViewController.swift
 //  DoorDash
 //
 //  Created by Adhyam Nagarajan, Padmaja on 10/27/18.
@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class ViewController: UIViewController {
+class SearchAddressViewController: UIViewController {
   
   var locationManager = CLLocationManager()
   
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
   }
 }
 
-extension ViewController: CLLocationManagerDelegate {
+extension SearchAddressViewController: CLLocationManagerDelegate {
   // Handle incoming location events.
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     let lastLocation = locations.last!
@@ -126,7 +126,7 @@ extension ViewController: CLLocationManagerDelegate {
   }
 }
 
-extension ViewController: GMSMapViewDelegate {
+extension SearchAddressViewController: GMSMapViewDelegate {
   func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
     print("didBeginDragging")
   }

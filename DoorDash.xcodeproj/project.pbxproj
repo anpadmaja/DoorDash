@@ -11,7 +11,7 @@
 		E8408E6821881B56009548E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8408E6621881B56009548E1 /* Localizable.strings */; };
 		E8408E7021882CCE009548E1 /* DoorDashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8408E6F21882CCE009548E1 /* DoorDashTests.swift */; };
 		E8D7B76721857B5000A46580 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7B76621857B5000A46580 /* AppDelegate.swift */; };
-		E8D7B76921857B5000A46580 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7B76821857B5000A46580 /* ViewController.swift */; };
+		E8D7B76921857B5000A46580 /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7B76821857B5000A46580 /* SearchAddressViewController.swift */; };
 		E8D7B76C21857B5000A46580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8D7B76A21857B5000A46580 /* Main.storyboard */; };
 		E8D7B76E21857B5100A46580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8D7B76D21857B5100A46580 /* Assets.xcassets */; };
 		E8D7B77121857B5100A46580 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8D7B76F21857B5100A46580 /* LaunchScreen.storyboard */; };
@@ -41,7 +41,7 @@
 		E8408E7121882CCE009548E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8D7B76321857B5000A46580 /* DoorDash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoorDash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8D7B76621857B5000A46580 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E8D7B76821857B5000A46580 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E8D7B76821857B5000A46580 /* SearchAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
 		E8D7B76B21857B5000A46580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E8D7B76D21857B5100A46580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8D7B77021857B5100A46580 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -187,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */,
-				E8D7B76821857B5000A46580 /* ViewController.swift */,
+				E8D7B76821857B5000A46580 /* SearchAddressViewController.swift */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -383,7 +383,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8D7B76921857B5000A46580 /* ViewController.swift in Sources */,
+				E8D7B76921857B5000A46580 /* SearchAddressViewController.swift in Sources */,
 				E8DFDC2E218599AD002C21E0 /* NearByStoreListViewController.swift in Sources */,
 				E8DFDC3321865076002C21E0 /* StoreViewCell.swift in Sources */,
 				E8DFDC3821867AE7002C21E0 /* StoreListViewModel.swift in Sources */,
