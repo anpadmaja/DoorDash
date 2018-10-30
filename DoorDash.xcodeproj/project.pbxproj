@@ -21,6 +21,7 @@
 		E8DFDC2E218599AD002C21E0 /* NearByStoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */; };
 		E8DFDC3321865076002C21E0 /* StoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC3121865076002C21E0 /* StoreViewCell.swift */; };
 		E8DFDC3821867AE7002C21E0 /* StoreListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */; };
+		E8EB46512188637B0048D8FB /* StoreListOperationsFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EB46502188637B0048D8FB /* StoreListOperationsFactoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		E8DFDC3121865076002C21E0 /* StoreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewCell.swift; sourceTree = "<group>"; };
 		E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListViewModel.swift; sourceTree = "<group>"; };
 		E8DFDC39218681E3002C21E0 /* DoorDash-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoorDash-Bridging-Header.h"; sourceTree = "<group>"; };
+		E8EB46502188637B0048D8FB /* StoreListOperationsFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListOperationsFactoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 		E8C4FDE221883FAA00434747 /* application */ = {
 			isa = PBXGroup;
 			children = (
+				E8EB464F2188635E0048D8FB /* operations */,
 				E8C4FDE321883FBC00434747 /* module */,
 			);
 			path = application;
@@ -287,6 +290,14 @@
 				E8D7B76D21857B5100A46580 /* Assets.xcassets */,
 			);
 			path = DoorDash;
+			sourceTree = "<group>";
+		};
+		E8EB464F2188635E0048D8FB /* operations */ = {
+			isa = PBXGroup;
+			children = (
+				E8EB46502188637B0048D8FB /* StoreListOperationsFactoryTests.swift */,
+			);
+			path = operations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +451,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8EB46512188637B0048D8FB /* StoreListOperationsFactoryTests.swift in Sources */,
 				E8C4FDEC2188464D00434747 /* StoreListViewModelTests.swift in Sources */,
 				E8C4FDE92188433500434747 /* StoreBasicInfoTests.swift in Sources */,
 			);
