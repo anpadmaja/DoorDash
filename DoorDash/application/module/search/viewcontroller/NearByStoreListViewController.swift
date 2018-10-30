@@ -25,7 +25,7 @@ class StoreTabBarViewController: UITabBarController {
     fatalError("init(coder:) has not been implemented")
   }
   
-  lazy var vc1 : NearByStoreListViewController = {
+  lazy var nearByStoresVC : NearByStoreListViewController = {
     let storeVC =  NearByStoreListViewController()
     storeVC.latitude = self.latitude
     storeVC.longitude = self.longitude
@@ -50,7 +50,7 @@ class StoreTabBarViewController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.viewControllers = [vc1, favoritesVC]
+    self.viewControllers = [nearByStoresVC, favoritesVC]
     configureNavBar()
     UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
   }
@@ -71,6 +71,7 @@ class StoreTabBarViewController: UITabBarController {
 
 class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
+  private var viewModel: StoreListViewModel?
   var latitude: CLLocationDegrees?
   var longitude: CLLocationDegrees?
   
@@ -86,35 +87,33 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     return tableView
   }()
   
-  private var viewModel: StoreListViewModel?
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     view.backgroundColor = UIColor.white
     view.addSubview(tableView)
     configureTableViewConstraints()
-    let url = URL(string: "https://api.doordash.com/") ?? URL(string: "")
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
     guard let lat = self.latitude,
       let long = self.longitude else { return }
     
-    let path = "v1/store_search/?lat="+String(lat)+"&lng="+String(long)
-    let manager = AFHTTPSessionManager(baseURL: url)
-    
-    manager.get(path,
-                parameters: nil,
-                progress: nil,
-                success: { (task, responseObject) in
-                  if let array = responseObject as? [Any] {
-                    var storeInfoList = [StoreBasicInfo]()
-                    for object in array {
-                      guard let storeInfo = StoreBasicInfo(json: object as! [String : Any]) else { continue }
-                      storeInfoList.append(storeInfo)
-                    }
-                    self.viewModel = StoreListViewModel(storeInfoList: storeInfoList)
-                    self.tableView.reloadData()
-                  }
+    let operation = StoreListOperations()
+    operation.getNearByStoresListOperation(latitude: lat,
+                                           longitude: long,
+                                           success: { (task, responseObject) in
+                                            if let array = responseObject as? [Any] {
+                                              var storeInfoList = [StoreBasicInfo]()
+                                              for object in array {
+                                                guard let storeInfo = StoreBasicInfo(json: object as! [String : Any]) else { continue }
+                                                storeInfoList.append(storeInfo)
+                                              }
+                                              self.viewModel = StoreListViewModel(storeInfoList: storeInfoList)
+                                              self.tableView.reloadData()
+                                            }
     }) { (task, error) in
       NSLog("failure")
     }
