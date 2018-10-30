@@ -151,11 +151,16 @@ class StoreViewCell: UITableViewCell {
     storeName.text = cellData.name
     cuisineType.text = cellData.description
     
-    let str = NSLocalizedString("deliveryFee", comment: "")
-    let str2 = NSLocalizedString("deliveryTime", comment: "")
-
-    deliveryFee.text = String(format: str, arguments: [String(cellData.deliveryFee)])
-    deliveryTime.text = String(format: str2, arguments: [String(cellData.deliveryTime)])
-    storeImage.setImageWith(URL(string: cellData.imageUrl)!)
+    let fee = NSLocalizedString("deliveryFee", comment: "")
+    let time = NSLocalizedString("deliveryTime", comment: "")
+    
+    deliveryFee.text = String(format: fee, arguments: [String(cellData.deliveryFee)])
+    deliveryTime.text = String(format: time, arguments: [String(cellData.deliveryTime)])
+    
+    if let imageWithURL = URL(string: cellData.imageUrl) {
+      storeImage.setImageWith(imageWithURL)
+    } else {
+      storeImage.image = UIImage(named: "defaultImage")
+    }
   }
 }

@@ -56,7 +56,9 @@ class SearchAddressViewController: UIViewController {
     locationManager.delegate = self
     
     // Add the map to the view, hide it until we've got a location update.
-    view.addSubview(mapView!)
+    if let mapView = self.mapView {
+      view.addSubview(mapView)
+    }
     view.addSubview(confirmButton)
     
     addConstraintsForMapView()
@@ -86,7 +88,7 @@ class SearchAddressViewController: UIViewController {
 extension SearchAddressViewController: CLLocationManagerDelegate {
   // Handle incoming location events.
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    let lastLocation = locations.last!
+    guard let lastLocation = locations.last else { return }
     
     let camera = GMSCameraPosition.camera(withLatitude: lastLocation.coordinate.latitude,
                                           longitude: lastLocation.coordinate.longitude,
