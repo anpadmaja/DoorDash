@@ -25,6 +25,7 @@ class StoreViewCell: UITableViewCell {
     let stackview = UIStackView()
     stackview.translatesAutoresizingMaskIntoConstraints = false
     stackview.axis = .vertical
+    stackview.spacing = 6
     return stackview
   }()
   
@@ -34,14 +35,13 @@ class StoreViewCell: UITableViewCell {
     return imageView
   }()
   
-  lazy var stackView: UIStackView = {
+  lazy var embeddedHorzStackView: UIStackView = {
     let stackview = UIStackView()
     stackview.translatesAutoresizingMaskIntoConstraints = false
     stackview.axis = .horizontal
     stackview.alignment = .fill
-    stackview.distribution = .fillProportionally
+    stackview.distribution = .equalSpacing
     stackview.spacing = 20
-    stackview.isUserInteractionEnabled = false
     return stackview
   }()
   
@@ -61,7 +61,7 @@ class StoreViewCell: UITableViewCell {
     a.textColor = UIColor.black.withAlphaComponent(0.56)
     a.textAlignment = .natural
     a.numberOfLines = 0
-    a.font = UIFont(name:"HelveticaNeue", size: 14.0)
+    a.font = UIFont(name:"HelveticaNeue", size: 16.0)
     return a
   }()
   
@@ -74,7 +74,7 @@ class StoreViewCell: UITableViewCell {
     a.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
     a.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
     a.lineBreakMode = .byTruncatingTail
-    a.font = UIFont(name:"HelveticaNeue", size: 14.0)
+    a.font = UIFont(name:"HelveticaNeue", size: 16.0)
     return a
   }()
   
@@ -122,14 +122,14 @@ class StoreViewCell: UITableViewCell {
     // stackview for delivery Fee and delivery Time
     // stackview is nicely taking care of the alignments else
     // this is getting harder and prone to errors
-    stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    stackView.addArrangedSubview(deliveryFee)
-    stackView.addArrangedSubview(deliveryTime)
+    embeddedHorzStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    embeddedHorzStackView.addArrangedSubview(deliveryFee)
+    embeddedHorzStackView.addArrangedSubview(deliveryTime)
     
     verticalStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
     verticalStackView.addArrangedSubview(storeName)
     verticalStackView.addArrangedSubview(cuisineType)
-    verticalStackView.addArrangedSubview(stackView)
+    verticalStackView.addArrangedSubview(embeddedHorzStackView)
     
     card.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
     card.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
@@ -150,8 +150,11 @@ class StoreViewCell: UITableViewCell {
   func configureCellData(cellData: StoreBasicInfo) {
     storeName.text = cellData.name
     cuisineType.text = cellData.description
-    deliveryFee.text = String(cellData.delivery_fee)
-    deliveryTime.text = String(cellData.deliveryTime)
+    let str = NSLocalizedString("deliveryFee", comment: "")
+    let str2 = NSLocalizedString("deliveryTime", comment: "")
+
+    deliveryFee.text = String(format: str, arguments: [String(cellData.deliveryFee)])
+    deliveryTime.text = String(format: str2, arguments: [String(cellData.deliveryTime)])
     storeImage.setImageWith(URL(string: cellData.imageUrl)!)
   }
 }

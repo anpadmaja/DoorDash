@@ -21,7 +21,7 @@ struct StoreBasicInfo {
   let name: String
   let id : Double
   let description: String
-  let delivery_fee : Double
+  let deliveryFee : Double
   let deliveryTime : Int
   let imageUrl : String
 }
@@ -31,7 +31,7 @@ extension StoreBasicInfo {
     guard let name = json["name"] as? String,
       let id = json["id"] as? Double,
       let description = json["description"] as? String,
-      let delivery_fee = json["delivery_fee"] as? Double,
+      let deliveryFee = json["delivery_fee"] as? Double,
       let deliveryTime = json["asap_time"] as? Int,
       let imageUrl = json["cover_img_url"] as? String
       else {
@@ -41,7 +41,7 @@ extension StoreBasicInfo {
     self.name = name
     self.id = id
     self.description = description
-    self.delivery_fee = delivery_fee
+    self.deliveryFee = deliveryFee
     self.deliveryTime = deliveryTime
     self.imageUrl = imageUrl
   }
