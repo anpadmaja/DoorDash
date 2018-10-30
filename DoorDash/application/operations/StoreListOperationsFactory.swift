@@ -19,22 +19,26 @@ class StoreListOperations: BaseOperation {
     
     let path = String(format: "v1/store_search/?lat=%1$@&lng=%2$@", String(latitude), String(longitude))
     
-    manager.get(path,
+    StoreListOperations.shared().get(path,
                 parameters: nil,
                 progress: nil,
                 success: success)
-    { (task, error) in
+    {
+      (task, error) in
       NSLog("failure")
     }
   }
 }
 
 class BaseOperation {
+  static let domainUrl = URL(string: "https://api.doordash.com/") ?? URL(string: "")
   
-  var manager: AFHTTPSessionManager
-  let domainUrl = URL(string: "https://api.doordash.com/") ?? URL(string: "")
-
-  init() {
-    manager = AFHTTPSessionManager(baseURL: domainUrl)
+  private static var sharedSessionManager: AFHTTPSessionManager = {
+    let networkManager = AFHTTPSessionManager(baseURL: domainUrl)
+    return networkManager
+  }()
+  
+  class func shared() -> AFHTTPSessionManager {
+    return sharedSessionManager
   }
 }

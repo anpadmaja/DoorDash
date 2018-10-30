@@ -12,8 +12,8 @@ import GoogleMaps
 
 class StoreTabBarViewController: UITabBarController {
   
-  var latitude: CLLocationDegrees
-  var longitude: CLLocationDegrees
+  private let latitude: CLLocationDegrees
+  private let longitude: CLLocationDegrees
 
   init(lat: CLLocationDegrees, long: CLLocationDegrees) {
     latitude = lat

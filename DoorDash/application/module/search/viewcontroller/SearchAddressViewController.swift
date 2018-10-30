@@ -11,13 +11,21 @@ import GoogleMaps
 
 class SearchAddressViewController: UIViewController {
   
-  var locationManager = CLLocationManager()
-  var mapView: GMSMapView?
   let camera = GMSCameraPosition.camera(withLatitude: 37.585600,
                                         longitude: -122.011151,
                                         zoom: 15.0)
-  
-  lazy var marker: GMSMarker = {
+  fileprivate var locationManager = CLLocationManager()
+
+  private lazy var mapView: GMSMapView = {
+    let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+    mapView.translatesAutoresizingMaskIntoConstraints = false
+    mapView.settings.myLocationButton = true
+    mapView.isMyLocationEnabled = true
+    mapView.delegate = self
+    return mapView
+  }()
+
+  fileprivate lazy var marker: GMSMarker = {
     let marker = GMSMarker()
     marker.position = CLLocationCoordinate2D(latitude: 37.585600, longitude: -122.011151)
     marker.title = "Home"
@@ -27,7 +35,7 @@ class SearchAddressViewController: UIViewController {
     return marker
   }()
 
-  lazy var confirmButton: UIButton = {
+  private lazy var confirmButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = UIColor.red
     button.setTitle("Confirm Address", for: .normal)
@@ -40,36 +48,30 @@ class SearchAddressViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-    mapView?.translatesAutoresizingMaskIntoConstraints = false
-    mapView?.settings.myLocationButton = true
-    mapView?.isMyLocationEnabled = true
-    mapView?.delegate = self
+    locationManager = CLLocationManager()
+    addPropertiesToLocationManager()
+
+    view.addSubview(mapView)
+    view.addSubview(confirmButton)
     
     navigationController?.navigationItem.title = "Choose an Address"
-    
-    locationManager = CLLocationManager()
+    addConstraintsForMapView()
+    addConstraintsForConfirmButton()
+  }
+  
+  private func addPropertiesToLocationManager() {
     locationManager.desiredAccuracy = kCLLocationAccuracyBest
     locationManager.requestAlwaysAuthorization()
     locationManager.distanceFilter = 50
     locationManager.startUpdatingLocation()
     locationManager.delegate = self
-    
-    // Add the map to the view, hide it until we've got a location update.
-    if let mapView = self.mapView {
-      view.addSubview(mapView)
-    }
-    view.addSubview(confirmButton)
-    
-    addConstraintsForMapView()
-    addConstraintsForConfirmButton()
   }
   
   private func addConstraintsForMapView() {
-    mapView?.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-    mapView?.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-    mapView?.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-    mapView?.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 0).isActive = true
+    mapView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+    mapView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+    mapView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+    mapView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: 0).isActive = true
   }
   
   private func addConstraintsForConfirmButton() {
@@ -93,14 +95,7 @@ extension SearchAddressViewController: CLLocationManagerDelegate {
     let camera = GMSCameraPosition.camera(withLatitude: lastLocation.coordinate.latitude,
                                           longitude: lastLocation.coordinate.longitude,
                                           zoom: 15.0)
-    
-    guard let mapView = self.mapView else { return }
-    if mapView.isHidden {
-      mapView.isHidden = false
-      mapView.camera = camera
-    } else {
-      mapView.animate(to: camera)
-    }
+    mapView.camera = camera
   }
   
   // Handle authorization for the location manager.
