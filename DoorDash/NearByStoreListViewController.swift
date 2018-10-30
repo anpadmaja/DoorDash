@@ -8,11 +8,27 @@
 
 import UIKit
 import AFNetworking
+import GoogleMaps
 
 class StoreTabBarViewController: UITabBarController {
   
+  var latitude: CLLocationDegrees
+  var longitude: CLLocationDegrees
+
+  init(lat: CLLocationDegrees, long: CLLocationDegrees) {
+    latitude = lat
+    longitude = long
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   lazy var vc1 : NearByStoreListViewController = {
     let storeVC =  NearByStoreListViewController()
+    storeVC.latitude = self.latitude
+    storeVC.longitude = self.longitude
     storeVC.tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab-explore")?.withRenderingMode(.alwaysOriginal), tag: 0)
     return storeVC
   }()
@@ -56,13 +72,16 @@ class StoreTabBarViewController: UITabBarController {
 
 class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
+  var latitude: CLLocationDegrees?
+  var longitude: CLLocationDegrees?
+  
   lazy var tableView: UITableView = {
     let tableView = UITableView()
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.separatorColor = UIColor.lightGray
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 60
-    tableView.register(UINib(nibName: "StoreViewCell", bundle: nil), forCellReuseIdentifier: "StoreViewCell")
+    tableView.register(StoreViewCell.self, forCellReuseIdentifier: "StoreViewCell")
     tableView.delegate = self
     tableView.dataSource = self
     return tableView
@@ -77,7 +96,11 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     view.addSubview(tableView)
     configureTableViewConstraints()
     let url = URL(string: "https://api.doordash.com/")!
-    let path = "v1/store_search/?lat=37.42274&lng=-122.139956"
+    
+    guard let lat = self.latitude,
+      let long = self.longitude else { return }
+    
+    let path = "v1/store_search/?lat="+String(lat)+"&lng="+String(long)
     let manager = AFHTTPSessionManager(baseURL: url)
     
     manager.get(path,
@@ -108,13 +131,12 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let vm = viewModel else { return 0 }
-    print(vm.storeInfoList.count)
     return vm.storeInfoList.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "StoreViewCell") as? StoreViewCell else { return UITableViewCell() }
-    cell.configureCellData(data: (viewModel?.storeInfoList[indexPath.row])!)
+    cell.configureCellData(cellData: viewModel!.storeInfoList[indexPath.row])
     return cell
   }
 }

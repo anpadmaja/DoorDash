@@ -15,7 +15,6 @@
 		E8D7B77121857B5100A46580 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8D7B76F21857B5100A46580 /* LaunchScreen.storyboard */; };
 		E8DFDC2E218599AD002C21E0 /* NearByStoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */; };
 		E8DFDC3321865076002C21E0 /* StoreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC3121865076002C21E0 /* StoreViewCell.swift */; };
-		E8DFDC362186515A002C21E0 /* StoreViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E8DFDC352186515A002C21E0 /* StoreViewCell.xib */; };
 		E8DFDC3821867AE7002C21E0 /* StoreListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		E8D7B77221857B5100A46580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearByStoreListViewController.swift; sourceTree = "<group>"; };
 		E8DFDC3121865076002C21E0 /* StoreViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewCell.swift; sourceTree = "<group>"; };
-		E8DFDC352186515A002C21E0 /* StoreViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewCell.xib; sourceTree = "<group>"; };
 		E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListViewModel.swift; sourceTree = "<group>"; };
 		E8DFDC39218681E3002C21E0 /* DoorDash-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DoorDash-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +94,6 @@
 				E8D7B77221857B5100A46580 /* Info.plist */,
 				E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */,
 				E8DFDC3121865076002C21E0 /* StoreViewCell.swift */,
-				E8DFDC352186515A002C21E0 /* StoreViewCell.xib */,
 				E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */,
 				E8DFDC39218681E3002C21E0 /* DoorDash-Bridging-Header.h */,
 			);
@@ -165,7 +162,6 @@
 			files = (
 				E8D7B77121857B5100A46580 /* LaunchScreen.storyboard in Resources */,
 				E8D7B76E21857B5100A46580 /* Assets.xcassets in Resources */,
-				E8DFDC362186515A002C21E0 /* StoreViewCell.xib in Resources */,
 				E8D7B76C21857B5000A46580 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
