@@ -150,6 +150,7 @@ class StoreViewCell: UITableViewCell {
   func configureCellData(cellData: StoreBasicInfo) {
     storeName.text = cellData.name
     cuisineType.text = cellData.description
+    
     let str = NSLocalizedString("deliveryFee", comment: "")
     let str2 = NSLocalizedString("deliveryTime", comment: "")
 

@@ -80,7 +80,7 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     tableView.separatorColor = UIColor.lightGray
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 60
-    tableView.register(StoreViewCell.self, forCellReuseIdentifier: "StoreViewCell")
+    tableView.register(StoreViewCell.self, forCellReuseIdentifier: storeViewCellReuseIdentifier)
     tableView.delegate = self
     tableView.dataSource = self
     return tableView
@@ -134,8 +134,8 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "StoreViewCell") as? StoreViewCell else { return UITableViewCell() }
-    cell.configureCellData(cellData: viewModel!.storeInfoList[indexPath.row])
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell, let vm = self.viewModel else { return UITableViewCell() }
+    cell.configureCellData(cellData: vm.storeInfoList[indexPath.row])
     return cell
   }
 }
