@@ -56,7 +56,6 @@ class StoreTabBarViewController: UITabBarController {
   }
   
   @objc func goBack(_ sender: AnyObject?) {
-    print("going back")
     self.navigationController?.popViewController(animated: true)
   }
   

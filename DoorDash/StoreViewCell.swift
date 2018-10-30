@@ -58,7 +58,7 @@ class StoreViewCell: UITableViewCell {
   lazy var cuisineType: UILabel = {
     let a = UILabel()
     a.translatesAutoresizingMaskIntoConstraints = false
-    a.textColor = UIColor.lightGray
+    a.textColor = UIColor.black.withAlphaComponent(0.56)
     a.textAlignment = .natural
     a.numberOfLines = 0
     a.font = UIFont(name:"HelveticaNeue", size: 14.0)
@@ -68,7 +68,7 @@ class StoreViewCell: UITableViewCell {
   lazy var deliveryFee: UILabel = {
     let a = UILabel()
     a.translatesAutoresizingMaskIntoConstraints = false
-    a.textColor = UIColor.black
+    a.textColor = UIColor.black.withAlphaComponent(0.8)
     a.textAlignment = .natural
     a.numberOfLines = 1
     a.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
@@ -81,12 +81,13 @@ class StoreViewCell: UITableViewCell {
   lazy var deliveryTime: UILabel = {
     let a = UILabel()
     a.translatesAutoresizingMaskIntoConstraints = false
-    a.textColor = UIColor.black
+    a.textColor = UIColor.black.withAlphaComponent(0.8)
     a.textAlignment = .natural
     a.numberOfLines = 1
     a.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
     a.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
     a.lineBreakMode = .byTruncatingTail
+    a.font = UIFont(name:"HelveticaNeue", size: 14.0)
     return a
   }()
   
