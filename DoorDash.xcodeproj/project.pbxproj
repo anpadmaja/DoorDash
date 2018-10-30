@@ -98,6 +98,100 @@
 			path = DoorDashTests;
 			sourceTree = "<group>";
 		};
+		E8408E7721882E40009548E1 /* applifecycle */ = {
+			isa = PBXGroup;
+			children = (
+				E8D7B76621857B5000A46580 /* AppDelegate.swift */,
+			);
+			path = applifecycle;
+			sourceTree = "<group>";
+		};
+		E8408E7821882E66009548E1 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		E8408E7921882E8C009548E1 /* application */ = {
+			isa = PBXGroup;
+			children = (
+				E8408E7B21882ECF009548E1 /* module */,
+				E8408E7A21882E96009548E1 /* bridgingheader */,
+			);
+			path = application;
+			sourceTree = "<group>";
+		};
+		E8408E7A21882E96009548E1 /* bridgingheader */ = {
+			isa = PBXGroup;
+			children = (
+				E8DFDC39218681E3002C21E0 /* DoorDash-Bridging-Header.h */,
+			);
+			path = bridgingheader;
+			sourceTree = "<group>";
+		};
+		E8408E7B21882ECF009548E1 /* module */ = {
+			isa = PBXGroup;
+			children = (
+				E8408E7D21882F1B009548E1 /* main */,
+				E8408E7C21882ED8009548E1 /* search */,
+			);
+			path = module;
+			sourceTree = "<group>";
+		};
+		E8408E7C21882ED8009548E1 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				E8408E8121883083009548E1 /* viewcontroller */,
+				E8408E802188306F009548E1 /* ui */,
+				E8408E7F21883048009548E1 /* localization */,
+				E8408E7E21882FFE009548E1 /* viewmodel */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		E8408E7D21882F1B009548E1 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				E8D7B76A21857B5000A46580 /* Main.storyboard */,
+				E8D7B76F21857B5100A46580 /* LaunchScreen.storyboard */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		E8408E7E21882FFE009548E1 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */,
+			);
+			path = viewmodel;
+			sourceTree = "<group>";
+		};
+		E8408E7F21883048009548E1 /* localization */ = {
+			isa = PBXGroup;
+			children = (
+				E8408E6621881B56009548E1 /* Localizable.strings */,
+			);
+			path = localization;
+			sourceTree = "<group>";
+		};
+		E8408E802188306F009548E1 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				E8DFDC3121865076002C21E0 /* StoreViewCell.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		E8408E8121883083009548E1 /* viewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */,
+				E8D7B76821857B5000A46580 /* ViewController.swift */,
+			);
+			path = viewcontroller;
+			sourceTree = "<group>";
+		};
 		E8D7B75A21857B5000A46580 = {
 			isa = PBXGroup;
 			children = (
@@ -121,17 +215,11 @@
 		E8D7B76521857B5000A46580 /* DoorDash */ = {
 			isa = PBXGroup;
 			children = (
-				E8D7B76621857B5000A46580 /* AppDelegate.swift */,
-				E8D7B76821857B5000A46580 /* ViewController.swift */,
-				E8D7B76A21857B5000A46580 /* Main.storyboard */,
-				E8D7B76D21857B5100A46580 /* Assets.xcassets */,
-				E8D7B76F21857B5100A46580 /* LaunchScreen.storyboard */,
 				E8D7B77221857B5100A46580 /* Info.plist */,
-				E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */,
-				E8DFDC3121865076002C21E0 /* StoreViewCell.swift */,
-				E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */,
-				E8DFDC39218681E3002C21E0 /* DoorDash-Bridging-Header.h */,
-				E8408E6621881B56009548E1 /* Localizable.strings */,
+				E8408E7921882E8C009548E1 /* application */,
+				E8408E7821882E66009548E1 /* resources */,
+				E8408E7721882E40009548E1 /* applifecycle */,
+				E8D7B76D21857B5100A46580 /* Assets.xcassets */,
 			);
 			path = DoorDash;
 			sourceTree = "<group>";
