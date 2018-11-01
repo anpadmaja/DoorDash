@@ -135,13 +135,42 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell, let vm = self.viewModel else { return UITableViewCell() }
     cell.configureCellData(cellData: vm.storeInfoList[indexPath.row])
+    cell.storeCellDelegate = self
     return cell
   }
 }
 
-class FavoritesViewController: UIViewController {
+extension NearByStoreListViewController: StoreViewCellDelegate {
+
+  func isMarkedFavorite(cellData: StoreBasicInfo) {
+    FavoritesViewController.favorites.append(cellData)
+  }
+}
+
+class FavoritesViewController: NearByStoreListViewController {
+
+  // This is the quickest way I could get it working considering the timelines of this project.
+  // There are more optimal ways than using a type variable, may be core data or storing it on server
+  // Other ways could be NSUserDafaults. But I personally do not recommend NSUserDafaults for such huge data.
+  
+  static var favorites:[StoreBasicInfo] = [StoreBasicInfo]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor.brown
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    tableView.reloadData()
+  }
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return FavoritesViewController.favorites.count
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell else { return UITableViewCell() }
+    cell.configureCellData(cellData: FavoritesViewController.favorites[indexPath.row])
+    cell.favorite.isHidden = true
+    return cell
   }
 }

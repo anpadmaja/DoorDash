@@ -10,9 +10,15 @@ import UIKit
 
 let storeViewCellReuseIdentifier = "StoreViewCell"
 
+protocol StoreViewCellDelegate : class {
+  func isMarkedFavorite(cellData: StoreBasicInfo)
+}
+
 class StoreViewCell: UITableViewCell {
   
   let genericAnchorConstraints: CGFloat = 12
+  weak var storeCellDelegate: StoreViewCellDelegate?
+  private var cellData: StoreBasicInfo?
   
   lazy var card: UIView = {
     let a = UIView()
@@ -26,6 +32,7 @@ class StoreViewCell: UITableViewCell {
     stackview.translatesAutoresizingMaskIntoConstraints = false
     stackview.axis = .vertical
     stackview.spacing = 6
+    stackview.isUserInteractionEnabled = true
     return stackview
   }()
   
@@ -42,6 +49,7 @@ class StoreViewCell: UITableViewCell {
     stackview.alignment = .fill
     stackview.distribution = .equalSpacing
     stackview.spacing = 20
+    stackview.isUserInteractionEnabled = true
     return stackview
   }()
   
@@ -87,7 +95,18 @@ class StoreViewCell: UITableViewCell {
     a.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
     a.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
     a.lineBreakMode = .byTruncatingTail
-    a.font = UIFont(name:"HelveticaNeue", size: 14.0)
+    a.font = UIFont(name:"HelveticaNeue", size: 16.0)
+    return a
+  }()
+  
+  lazy var favorite: UIButton = {
+    let a = UIButton()
+    a.translatesAutoresizingMaskIntoConstraints = false
+    var templateImage = UIImage(named: "tab-star")?.withRenderingMode(.alwaysOriginal)
+    a.setImage(templateImage, for: .normal)
+    a.imageView?.tintColor = UIColor.red
+    a.isUserInteractionEnabled = true
+    a.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
     return a
   }()
   
@@ -114,17 +133,24 @@ class StoreViewCell: UITableViewCell {
     isAccessibilityElement = true
   }
   
+  @objc private func addToFavorites() {
+    guard let info = cellData else { return }
+    storeCellDelegate?.isMarkedFavorite(cellData: info)
+    favorite.tintColor = UIColor.blue
+  }
+  
   private func initializeLayout () {
     contentView.addSubview(card)
     card.addSubview(storeImage)
     card.addSubview(verticalStackView)
     
-    // stackview for delivery Fee and delivery Time
+    // horizontal stackview for delivery Fee and delivery Time
     // stackview is nicely taking care of the alignments else
     // this is getting harder and prone to errors
     embeddedHorzStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     embeddedHorzStackView.addArrangedSubview(deliveryFee)
     embeddedHorzStackView.addArrangedSubview(deliveryTime)
+    embeddedHorzStackView.addArrangedSubview(favorite)
     
     verticalStackView.arrangedSubviews.forEach({ $0.removeFromSuperview() })
     verticalStackView.addArrangedSubview(storeName)
@@ -148,6 +174,7 @@ class StoreViewCell: UITableViewCell {
   }
   
   func configureCellData(cellData: StoreBasicInfo) {
+    self.cellData = cellData
     storeName.text = cellData.name
     cuisineType.text = cellData.description
     

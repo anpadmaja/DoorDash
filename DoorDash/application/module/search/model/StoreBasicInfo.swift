@@ -15,6 +15,7 @@ struct StoreBasicInfo {
   let deliveryFee : Double
   let deliveryTime : Int
   let imageUrl : String
+  var isFavorite: Bool
 }
 
 extension StoreBasicInfo {
@@ -35,5 +36,6 @@ extension StoreBasicInfo {
     self.deliveryFee = deliveryFee
     self.deliveryTime = deliveryTime
     self.imageUrl = imageUrl
+    self.isFavorite = false
   }
 }
