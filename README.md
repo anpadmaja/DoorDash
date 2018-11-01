@@ -1,7 +1,5 @@
 # DoorDash
 
-Please find attached the source code for the project submission. 
-
 What I have covered:
 1. google map api integration. 
 2. Navigation Controller for the app
@@ -21,6 +19,4 @@ Due to time constraints, I wasn't able to add
 5. My code is not super reusable per se. I could have done better with more time
 6. Fix a lot of bugs I found
 
-Please find the link to my github repo for the same: https://github.com/anpadmaja/DoorDash
-
-I look forward for the feedback. Thank you for your time and consideration. 
+The work is in progress.
