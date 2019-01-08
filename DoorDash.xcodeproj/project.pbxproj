@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		CA0698A38E3D879F4894E9A8 /* Pods_DoorDash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684B1BB33D67348123B052EE /* Pods_DoorDash.framework */; };
+		E808B1F921E1916000187862 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E808B1F821E1916000187862 /* FavouritesViewController.swift */; };
+		E808B1FB21E191FE00187862 /* StoreTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E808B1FA21E191FE00187862 /* StoreTabBarViewController.swift */; };
+		E835374921E43A3300BF9920 /* StoreDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E835374821E43A3300BF9920 /* StoreDetailsViewController.swift */; };
 		E8408E6821881B56009548E1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8408E6621881B56009548E1 /* Localizable.strings */; };
+		E8C4A25821E1807C0075ED05 /* FavouriteStoreListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4A25721E1807C0075ED05 /* FavouriteStoreListViewModel.swift */; };
 		E8C4FDE121883F8200434747 /* StoreBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4FDE021883F8200434747 /* StoreBasicInfo.swift */; };
 		E8C4FDE92188433500434747 /* StoreBasicInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4FDE82188433500434747 /* StoreBasicInfoTests.swift */; };
 		E8C4FDEC2188464D00434747 /* StoreListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C4FDEB2188464D00434747 /* StoreListViewModelTests.swift */; };
@@ -38,10 +42,14 @@
 		208590C4407C860448897F43 /* Pods-DoorDash.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash.debug.xcconfig"; path = "Target Support Files/Pods-DoorDash/Pods-DoorDash.debug.xcconfig"; sourceTree = "<group>"; };
 		684B1BB33D67348123B052EE /* Pods_DoorDash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DoorDash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC5526CB5AD3319ABA6664D /* Pods-DoorDash.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoorDash.release.xcconfig"; path = "Target Support Files/Pods-DoorDash/Pods-DoorDash.release.xcconfig"; sourceTree = "<group>"; };
+		E808B1F821E1916000187862 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
+		E808B1FA21E191FE00187862 /* StoreTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTabBarViewController.swift; sourceTree = "<group>"; };
+		E835374821E43A3300BF9920 /* StoreDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailsViewController.swift; sourceTree = "<group>"; };
 		E8408E6521881AD6009548E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E8408E6721881B56009548E1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E8408E6D21882CCE009548E1 /* DoorDashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoorDashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8408E7121882CCE009548E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8C4A25721E1807C0075ED05 /* FavouriteStoreListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStoreListViewModel.swift; sourceTree = "<group>"; };
 		E8C4FDE021883F8200434747 /* StoreBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBasicInfo.swift; sourceTree = "<group>"; };
 		E8C4FDE82188433500434747 /* StoreBasicInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBasicInfoTests.swift; sourceTree = "<group>"; };
 		E8C4FDEB2188464D00434747 /* StoreListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListViewModelTests.swift; sourceTree = "<group>"; };
@@ -85,7 +93,6 @@
 				208590C4407C860448897F43 /* Pods-DoorDash.debug.xcconfig */,
 				CBC5526CB5AD3319ABA6664D /* Pods-DoorDash.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -173,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				E8DFDC3721867AE7002C21E0 /* StoreListViewModel.swift */,
+				E8C4A25721E1807C0075ED05 /* FavouriteStoreListViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -198,6 +206,9 @@
 			children = (
 				E8DFDC2D218599AD002C21E0 /* NearByStoreListViewController.swift */,
 				E8D7B76821857B5000A46580 /* SearchAddressViewController.swift */,
+				E808B1F821E1916000187862 /* FavouritesViewController.swift */,
+				E808B1FA21E191FE00187862 /* StoreTabBarViewController.swift */,
+				E835374821E43A3300BF9920 /* StoreDetailsViewController.swift */,
 			);
 			path = viewcontroller;
 			sourceTree = "<group>";
@@ -330,6 +341,7 @@
 				E8D7B76021857B5000A46580 /* Frameworks */,
 				E8D7B76121857B5000A46580 /* Resources */,
 				319D8D5A32A46CC5D1CC7E51 /* [CP] Embed Pods Frameworks */,
+				E041B90AFF9EF695CAF65AB4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -444,6 +456,30 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E041B90AFF9EF695CAF65AB4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DoorDash/Pods-DoorDash-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DoorDash/Pods-DoorDash-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -461,10 +497,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E808B1F921E1916000187862 /* FavouritesViewController.swift in Sources */,
 				E8C4FDF021884DE600434747 /* StoreListOperationsFactory.swift in Sources */,
 				E8D7B76921857B5000A46580 /* SearchAddressViewController.swift in Sources */,
+				E8C4A25821E1807C0075ED05 /* FavouriteStoreListViewModel.swift in Sources */,
+				E808B1FB21E191FE00187862 /* StoreTabBarViewController.swift in Sources */,
 				E8DFDC2E218599AD002C21E0 /* NearByStoreListViewController.swift in Sources */,
 				E8C4FDE121883F8200434747 /* StoreBasicInfo.swift in Sources */,
+				E835374921E43A3300BF9920 /* StoreDetailsViewController.swift in Sources */,
 				E8DFDC3321865076002C21E0 /* StoreViewCell.swift in Sources */,
 				E8DFDC3821867AE7002C21E0 /* StoreListViewModel.swift in Sources */,
 				E8D7B76721857B5000A46580 /* AppDelegate.swift in Sources */,

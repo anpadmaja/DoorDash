@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StoreBasicInfo {
+struct StoreBasicInfo: Equatable {
   let name: String
   let id : Double
   let description: String
@@ -16,6 +16,16 @@ struct StoreBasicInfo {
   let deliveryTime : Int
   let imageUrl : String
   var isFavorite: Bool
+  
+  public static func == (lhs: StoreBasicInfo, rhs: StoreBasicInfo) -> Bool {
+    return lhs.name == rhs.name &&
+      lhs.id == rhs.id &&
+      lhs.description == rhs.description &&
+      lhs.deliveryFee == rhs.deliveryFee &&
+      lhs.deliveryTime == rhs.deliveryTime &&
+      lhs.imageUrl == rhs.imageUrl &&
+      lhs.isFavorite == rhs.isFavorite
+  }
 }
 
 extension StoreBasicInfo {

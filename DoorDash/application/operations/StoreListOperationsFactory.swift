@@ -10,7 +10,7 @@ import Foundation
 import GoogleMaps
 import AFNetworking
 
-class StoreListOperations: BaseOperation {
+class StoreListOperationsFactory: BaseOperation {
   
   func getNearByStoresListOperation(latitude: CLLocationDegrees,
                                   longitude: CLLocationDegrees,
@@ -19,7 +19,7 @@ class StoreListOperations: BaseOperation {
     
     let path = String(format: "v1/store_search/?lat=%1$@&lng=%2$@", String(latitude), String(longitude))
     
-    StoreListOperations.shared().get(path,
+    StoreListOperationsFactory.shared().get(path,
                 parameters: nil,
                 progress: nil,
                 success: success)

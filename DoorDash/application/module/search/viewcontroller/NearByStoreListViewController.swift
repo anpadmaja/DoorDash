@@ -10,89 +10,42 @@ import UIKit
 import AFNetworking
 import GoogleMaps
 
-class StoreTabBarViewController: UITabBarController {
+class NearByStoreListViewController: UITableViewController {
   
-  private let latitude: CLLocationDegrees
-  private let longitude: CLLocationDegrees
+  private var viewModel = StoreListViewModel.initial
 
-  init(lat: CLLocationDegrees, long: CLLocationDegrees) {
-    latitude = lat
-    longitude = long
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  lazy var nearByStoresVC : NearByStoreListViewController = {
-    let storeVC =  NearByStoreListViewController()
-    storeVC.latitude = self.latitude
-    storeVC.longitude = self.longitude
-    storeVC.tabBarItem = UITabBarItem(title: "Explore", image: UIImage(named: "tab-explore")?.withRenderingMode(.alwaysOriginal), tag: 0)
-    return storeVC
-  }()
-  
-  lazy var favoritesVC : FavoritesViewController = {
-    let storeVC =  FavoritesViewController()
-    storeVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "tab-star")?.withRenderingMode(.alwaysOriginal), tag: 1)
-    return storeVC
-  }()
-  
-  lazy var barButtonItem: UIBarButtonItem = {
-    let backImage = UIImage(named: "nav-address")
-    let a = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-    a.setBackgroundImage(backImage, for: .normal, barMetrics: UIBarMetrics.default)
-    a.target = self
-    a.action = #selector(goBack(_:))
-    return a
-  }()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.viewControllers = [nearByStoresVC, favoritesVC]
-    configureNavBar()
-    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], for: .selected)
-  }
-  
-  @objc func goBack(_ sender: AnyObject?) {
-    self.navigationController?.popViewController(animated: true)
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
-  
-  func configureNavBar() {
-    navigationItem.leftBarButtonItem = barButtonItem
-    navigationItem.title = "DoorDash"
-  }
-}
-
-class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-  
-  private var viewModel: StoreListViewModel?
   var latitude: CLLocationDegrees?
   var longitude: CLLocationDegrees?
   
-  lazy var tableView: UITableView = {
-    let tableView = UITableView()
-    tableView.translatesAutoresizingMaskIntoConstraints = false
+  var storeListDidChange: (([StoreBasicInfo]) -> Void)?
+  private var favoritesViewModel = FavouriteStoreListViewModel()
+  
+  enum Sections: Int {
+    case All = 0
+    
+    var title: String {
+      switch self {
+      case .All: return "Store List"
+      }
+    }
+    
+    static let count = 1
+    
+    init?(section: Int) {
+      self.init(rawValue: section)
+    }
+    
+    init?(indexPath: IndexPath) {
+      self.init(rawValue: indexPath.section)
+    }
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     tableView.separatorColor = UIColor.lightGray
     tableView.rowHeight = UITableView.automaticDimension
     tableView.estimatedRowHeight = 60
     tableView.register(StoreViewCell.self, forCellReuseIdentifier: storeViewCellReuseIdentifier)
-    tableView.delegate = self
-    tableView.dataSource = self
-    return tableView
-  }()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    view.backgroundColor = UIColor.white
-    view.addSubview(tableView)
-    configureTableViewConstraints()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +54,7 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
     guard let lat = self.latitude,
       let long = self.longitude else { return }
     
-    let operation = StoreListOperations()
+    let operation = StoreListOperationsFactory()
     operation.getNearByStoresListOperation(latitude: lat,
                                            longitude: long,
                                            success: { (task, responseObject) in
@@ -111,66 +64,87 @@ class NearByStoreListViewController: UIViewController, UITableViewDelegate, UITa
                                                 guard let storeInfo = StoreBasicInfo(json: object as! [String : Any]) else { continue }
                                                 storeInfoList.append(storeInfo)
                                               }
-                                              self.viewModel = StoreListViewModel(storeInfoList: storeInfoList)
-                                              self.tableView.reloadData()
+                                              self.storeListDidChange?(storeInfoList)
                                             }
     }) { (task, error) in
       NSLog("failure")
     }
   }
-
-  func configureTableViewConstraints()
-  {
-    tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-    tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-    tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-    tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+  
+  func withValues(_ mutations: (inout StoreListViewModel) -> Void) {
+    let oldModel = self.viewModel
+    
+    mutations(&self.viewModel)
+    
+    /*
+     The model and state changes can trigger table view updates so we'll
+     wrap both calls in a begin/end updates call to the table view.
+     */
+    tableView.beginUpdates()
+    
+    let modelDiff = oldModel.diffed(with: self.viewModel)
+    modelDidChange(diff: modelDiff)
+    
+    tableView.endUpdates()
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let vm = viewModel else { return 0 }
-    return vm.storeInfoList.count
+  private func modelDidChange(diff: StoreListViewModel.Diff) {
+    if diff.hasAnyChanges {
+      guard let change = diff.storeListChange else { return }
+      switch change {
+      case .inserted:
+        let indexPath = IndexPath(row: diff.from.count, section: Sections.All.rawValue)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        
+      case .updated(let indexes):
+        let indexPath = indexes.map({IndexPath(row: $0, section: Sections.All.rawValue)})
+        tableView.reloadRows(at: indexPath, with: .automatic)
+        
+      case .removed:
+        let indexPath = IndexPath(row: diff.from.count-1, section: Sections.All.rawValue)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+      }
+    }
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell, let vm = self.viewModel else { return UITableViewCell() }
-    cell.configureCellData(cellData: vm.storeInfoList[indexPath.row])
-    cell.storeCellDelegate = self
-    return cell
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    guard let viewModel = viewModel else { return 0 }
+    return viewModel.storeInfoList.count
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let section = Sections(indexPath: indexPath) else { return UITableViewCell() }
+    switch section {
+    case .All:
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell else { return UITableViewCell() }
+//      guard let viewModel = viewModel else { return UITableViewCell() }
+      cell.configureCellData(cellData: viewModel[at: indexPath.row])
+      cell.storeCellDelegate = self
+      return cell
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    guard let section = Sections(section: section) else { return nil }
+    return section.title
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let section = Sections(indexPath: indexPath) else { return }
+    switch section {
+    case .All:
+      let detailsVC = StoreDetailsViewController()
+      detailsVC.setStoreDetails(store: viewModel[at: indexPath.row])
+      navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
   }
 }
 
 extension NearByStoreListViewController: StoreViewCellDelegate {
 
   func isMarkedFavorite(cellData: StoreBasicInfo) {
-    FavoritesViewController.favorites.append(cellData)
-  }
-}
-
-class FavoritesViewController: NearByStoreListViewController {
-
-  // This is the quickest way I could get it working considering the timelines of this project.
-  // There are more optimal ways than using a type variable, may be core data or storing it on server
-  // Other ways could be NSUserDafaults. But I personally do not recommend NSUserDafaults for such huge data.
-  
-  static var favorites:[StoreBasicInfo] = [StoreBasicInfo]()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    favoritesViewModel.addToFavorites(storeInfo: cellData)
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    tableView.reloadData()
-  }
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return FavoritesViewController.favorites.count
-  }
-  
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell else { return UITableViewCell() }
-    cell.configureCellData(cellData: FavoritesViewController.favorites[indexPath.row])
-    cell.favorite.isHidden = true
-    return cell
-  }
 }
