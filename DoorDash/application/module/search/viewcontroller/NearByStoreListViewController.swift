@@ -54,21 +54,19 @@ class NearByStoreListViewController: UITableViewController {
     guard let lat = self.latitude,
       let long = self.longitude else { return }
     
-    let operation = StoreListOperationsFactory()
-    operation.getNearByStoresListOperation(latitude: lat,
-                                           longitude: long,
-                                           success: { (task, responseObject) in
-                                            if let array = responseObject as? [Any] {
-                                              var storeInfoList = [StoreBasicInfo]()
-                                              for object in array {
-                                                guard let storeInfo = StoreBasicInfo(json: object as! [String : Any]) else { continue }
-                                                storeInfoList.append(storeInfo)
-                                              }
-                                              self.storeListDidChange?(storeInfoList)
-                                            }
-    }) { (task, error) in
+    self.viewModel.fetchStoreList(lat: lat,
+                                  long: long,
+                                  success: { [weak self] result in
+                                    guard let strongSelf = self else { return }
+                                    
+                                    strongSelf.withValues { model in
+                                      model = StoreListViewModel(storeInfoList: result)
+                                    }
+                                    
+    }, failure: {
       NSLog("failure")
     }
+    )
   }
   
   func withValues(_ mutations: (inout StoreListViewModel) -> Void) {
@@ -92,9 +90,9 @@ class NearByStoreListViewController: UITableViewController {
     if diff.hasAnyChanges {
       guard let change = diff.storeListChange else { return }
       switch change {
-      case .inserted:
-        let indexPath = IndexPath(row: diff.from.count, section: Sections.All.rawValue)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+      case .inserted(let indexes):
+        let indexPath = indexes.map({IndexPath(row: $0, section: Sections.All.rawValue)})
+        tableView.insertRows(at: indexPath, with: .automatic)
         
       case .updated(let indexes):
         let indexPath = indexes.map({IndexPath(row: $0, section: Sections.All.rawValue)})
@@ -108,7 +106,6 @@ class NearByStoreListViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    guard let viewModel = viewModel else { return 0 }
     return viewModel.storeInfoList.count
   }
   

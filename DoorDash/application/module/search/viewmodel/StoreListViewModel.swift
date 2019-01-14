@@ -34,13 +34,31 @@ struct StoreListViewModel: Equatable {
   }
   
   static var initial: StoreListViewModel {
-    let info1 = StoreBasicInfo(name: "Alla", id : 1.0, description: "String", deliveryFee : 10.00, deliveryTime : 1, imageUrl : "www.google.com", isFavorite: false)
-    return StoreListViewModel(storeInfoList: [info1])
+    return StoreListViewModel(storeInfoList: [])
   }
   
+  func fetchStoreList(lat: CLLocationDegrees, long: CLLocationDegrees, success: @escaping (([StoreBasicInfo]) -> Void), failure: @escaping () -> Void) {
+    let operation = StoreListOperationsFactory()
+    operation.getNearByStoresListOperation(latitude: lat,
+                                           longitude: long,
+                                           success: { (_,responseObject) in
+                                            if let array = responseObject as? [Any] {
+                                              var storeInfoList = [StoreBasicInfo]()
+                                              for object in array {
+                                                guard let storeInfo = StoreBasicInfo(json: object as! [String : Any]) else { continue }
+                                                storeInfoList.append(storeInfo)
+                                              }
+                                              success(storeInfoList)
+                                            }
+    },
+                                           failure: { (_,_) in
+                                            failure()
+    })
+  }
+
   struct Diff {
     enum StoreListChange: Equatable {
-      case inserted(StoreBasicInfo)
+      case inserted(at: [Int])
       case removed(StoreBasicInfo)
       case updated(at: [Int])
     }
@@ -60,17 +78,31 @@ struct StoreListViewModel: Equatable {
     }
   }
   
-  func diffed(with other: StoreListViewModel) -> Diff {
+  func diffed(with newModel: StoreListViewModel) -> Diff {
     var storeListChange: Diff.StoreListChange?
     
-    if other.count-1 == storeInfoList.count {
-      storeListChange = .inserted(other.storeInfoList.last!)
-    } else if other.count == storeInfoList.count-1 {
-      storeListChange = .removed(storeInfoList.last!)
-    } else if other.count == storeInfoList.count {
+    if newModel.count > storeInfoList.count {
       var indeces = [Int]()
       for (index,storeInfo) in storeInfoList.enumerated() {
-        if storeInfo != other[at: index] {
+        if storeInfo != newModel[at: index] {
+          indeces.append(index)
+        }
+      }
+      for i in storeInfoList.count..<newModel.count {
+        indeces.append(i)
+      }
+      
+      if indeces.isEmpty {
+        storeListChange = nil
+      } else {
+        storeListChange = .inserted(at: indeces)
+      }
+    } else if newModel.count == storeInfoList.count-1 {
+      storeListChange = .removed(storeInfoList.last!)
+    } else if newModel.count == storeInfoList.count {
+      var indeces = [Int]()
+      for (index,storeInfo) in storeInfoList.enumerated() {
+        if storeInfo != newModel[at: index] {
           indeces.append(index)
         }
       }
@@ -81,10 +113,10 @@ struct StoreListViewModel: Equatable {
         storeListChange = .updated(at: indeces)
       }
     } else {
-      fatalError("this case should never happen")
+      fatalError("should not reach here")
     }
     
-    return Diff(from: self, to: other, storeListChange: storeListChange)
+    return Diff(from: self, to: newModel, storeListChange: storeListChange)
   }
 }
 
