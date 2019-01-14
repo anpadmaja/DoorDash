@@ -114,7 +114,6 @@ class NearByStoreListViewController: UITableViewController {
     switch section {
     case .All:
       guard let cell = tableView.dequeueReusableCell(withIdentifier: storeViewCellReuseIdentifier) as? StoreViewCell else { return UITableViewCell() }
-//      guard let viewModel = viewModel else { return UITableViewCell() }
       cell.configureCellData(cellData: viewModel[at: indexPath.row])
       cell.storeCellDelegate = self
       return cell
